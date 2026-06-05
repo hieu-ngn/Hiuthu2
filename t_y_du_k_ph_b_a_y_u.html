@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tây Du Ký: Phá Bùa Yêu - Giải Cứu Sư Phụ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,500;0,700;1,400&family=Be+Vietnam+Pro:wght=400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#dfb15b',
+                        darkGold: '#b88e3a',
+                        crimson: '#5a0601',
+                        darkCrimson: '#3a0200',
+                        inkBlack: '#0b0100',
+                        parchment: '#fbf7eb',
+                        amuletYellow: '#f4d03f',
+                        amuletRed: '#c0392b'
+                    },
+                    fontFamily: {
+                        playfair: ['"Playfair Display"', 'serif'],
+                        vietnam: ['"Be Vietnam Pro"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background-color: #0b0100;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            user-select: none;
+        }
+
+        /* KHUNG CHUẨN TRÌNH CHIẾU 1280x720 TỰ ĐỘNG CO GIÃN THEO MÀN HÌNH */
+        .presentation-viewport {
+            width: 1280px;
+            height: 720px;
+            background-color: #1a0a0d; 
+            border: 4px solid #dfb15b; 
+            border-radius: 12px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), inset 0 0 120px rgba(0, 0, 0, 0.85);
+            position: relative;
+            flex-shrink: 0; 
+            transform: scale(1);
+            transform-origin: center center;
+            overflow: hidden;
+            transition: transform 0.1s ease-out;
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 70px;
+            width: 1140px;
+            height: 620px;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 5;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide.active {
+            display: flex;
+            animation: fadeInSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Slide Bối cảnh */
+        .bone-demon-intro {
+            background: radial-gradient(circle, rgba(60, 10, 15, 0.95) 0%, rgba(11, 1, 0, 1) 100%) !important;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 40px 50px;
+        }
+
+        .amulet-decor {
+            position: absolute;
+            width: 50px;
+            height: 120px;
+            background-color: #f4d03f;
+            border: 2px solid #c0392b;
+            color: #c0392b;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            font-weight: bold;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            opacity: 0.8;
+            z-index: 1;
+        }
+        .amulet-1 { top: 20px; left: 10%; transform: rotate(-15deg); animation: float1 4s infinite alternate; }
+        .amulet-2 { top: 40px; right: 15%; transform: rotate(10deg); animation: float2 5s infinite alternate-reverse; }
+
+        @keyframes float1 {
+            0% { transform: translateY(0) rotate(-15deg); }
+            100% { transform: translateY(20px) rotate(-10deg); }
+        }
+        @keyframes float2 {
+            0% { transform: translateY(0) rotate(10deg); }
+            100% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .amulet-question-box {
+            background: #f4d03f;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(192, 57, 43, 0.1) 20px, rgba(192, 57, 43, 0.1) 21px);
+            border: 4px solid #c0392b;
+            border-radius: 4px;
+            color: #c0392b;
+            padding: 24px 30px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        .amulet-question-box::before {
+            content: "PHONG ẤN";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #c0392b;
+            color: #f4d03f;
+            padding: 2px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .spooky-glow {
+            text-shadow: 0 0 10px rgba(223, 177, 91, 0.85), 0 0 25px rgba(200, 10, 10, 0.95);
+        }
+
+        h1, h2, h3 {
+            color: #dfb15b;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+        }
+
+        .content-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .timer-bar {
+            fill: none;
+            stroke: #dfb15b;
+            stroke-width: 8;
+            stroke-dasharray: 339;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear, stroke 0.3s;
+        }
+
+        .answer-reveal-box {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px dashed rgba(223, 177, 91, 0.3);
+            border-radius: 8px;
+            padding: 15px 20px;
+            text-align: center;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s;
+        }
+
+        .answer-reveal-box.revealed {
+            border: 2px solid #dfb15b;
+            background: rgba(90, 6, 1, 0.85);
+            box-shadow: 0 0 24px rgba(223, 177, 91, 0.35);
+        }
+
+        .slide-footer {
+            border-top: 1px solid rgba(223, 177, 91, 0.2);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #dfb15b;
+            color: #dfb15b;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #dfb15b;
+            color: #0b0100;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr); /* 1 cột tiêu đề + 7 cột chính */
+            gap: 5px;
+            padding: 10px;
+            background: rgba(20, 5, 5, 0.95);
+            border: 2px solid #dfb15b;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .grid-cell {
+            aspect-ratio: 1.3;
+            background: rgba(223, 177, 91, 0.08);
+            border: 1px solid rgba(223, 177, 91, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #dfb15b;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .grid-cell:hover:not(.grid-label) {
+            background: rgba(223, 177, 91, 0.25);
+            box-shadow: inset 0 0 8px rgba(223,177,91,0.5);
+        }
+
+        .grid-cell.crossed {
+            background: rgba(192, 57, 43, 0.35);
+            color: #ff5555;
+            border-color: #ff4444;
+        }
+
+        .grid-cell.found {
+            background: rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+            border-color: #2ecc71;
+            box-shadow: 0 0 15px #2ecc71;
+        }
+
+        .grid-label {
+            background: rgba(223, 177, 91, 0.15);
+            color: #fbf7eb;
+            cursor: default;
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-viewport" id="viewport">
+        
+        <!-- SLIDE 1: GIỚI THIỆU BỐI CẢNH -->
+        <div class="slide active bone-demon-intro" id="slide1">
+            <div class="amulet-decor amulet-1">急急如律令</div>
+            <div class="amulet-decor amulet-2">封印 Cứu Sư Phụ</div>
+
+            <h3 style="letter-spacing: 5px; text-transform: uppercase; font-size: 20px; opacity: 0.8; text-align: center; position: relative; z-index: 5;">Tây Du Ký - Kiếp Nạn Động Bàn Tơ</h3>
+            <div class="content-body" style="text-align: center; max-width: 900px; margin: 0 auto; position: relative; z-index: 5;">
+                <h1 class="spooky-glow font-playfair font-bold uppercase leading-tight tracking-wide" style="margin-bottom: 20px; font-size: 46px; color: #dfb15b;">ĐẠI CHIẾN PHÁ BÙA YÊU - GIẢI CỨU SƯ PHỤ</h1>
+                <p style="font-size: 17px; margin-bottom: 25px; line-height: 1.8; color: #fbf7eb;">
+                    Sau khi tiếp tục lên đường thỉnh kinh, Đường Tăng bất ngờ rơi vào âm mưu hiểm độc của Bạch Cốt Tinh! <br>
+                    Để ngăn các đồ đệ giải cứu, Bạch Cốt Tinh đã yểm lên người sư phụ nhiều lá bùa phong ấn yêu lực và giam giữ người tại một trong <strong>42 ô bí ẩn (Trận đồ Động Bàn Tơ)</strong>. <br>
+                    Bốn đội chơi sẽ hóa thân thành các đồ đệ, dùng trí tuệ và sự hiểu biết phá giải bùa yêu để tìm ra vị trí giam giữ Sư phụ!
+                </p>
+                <div>
+                    <button class="bg-gradient-to-r from-red-800 to-red-950 text-gold font-bold px-8 py-3.5 rounded-full border border-gold/50 hover:scale-105 transition shadow-lg text-lg" onclick="playSpiderLaugh()">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> KHỞI ĐỘNG HÀNH TRÌNH
+                    </button>
+                </div>
+            </div>
+            <div class="slide-footer" style="position: relative; z-index: 5;">
+                <span class="text-gold/80 font-medium">Bối Cảnh Vòng 2</span>
+                <div class="nav-controls">
+                    <button class="nav-btn" disabled>Trước</button>
+                    <button class="nav-btn" onclick="nextSlide()">Tiếp theo</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: LUẬT CHƠI -->
+        <div class="slide" id="slide2">
+            <h2 class="text-[32px] uppercase font-playfair border-b border-gold/30 pb-2 mb-4">LUẬT CHƠI: PHÁ BÙA - TÌM TRẬN ĐỒ</h2>
+            <div class="content-body">
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="bg-black/40 border border-gold/30 rounded-lg p-5 shadow-inner">
+                        <h3 class="text-[20px] text-gold font-playfair font-bold mb-3 border-b border-gold/20 pb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-scroll text-base"></i> Cách Thức Giải Bùa
+                        </h3>
+                        <ul class="space-y-3.5 text-[15px] text-parchment/90">
+                            <li class="relative pl-6"><span class="absolute left-0 text-gold">📜</span><strong>Hành trang:</strong> Mỗi đội được phát từ 10 - 15 tờ giấy A4 sạch viết đáp án.</li>
+                            <li class="relative pl-6"><span class="absolute left-0 text-gold">⏱️</span><strong>Thời gian sinh tử:</strong> Các đội chỉ có đúng <strong>20 giây</strong> thảo luận và ghi đáp án vào giấy.</li>
+                            <li class="relative pl-6"><span class="absolute left-0 text-gold">🕷️</span><strong>Thu hồi:</strong> Hết giờ, Nhền Nhện Tinh sẽ lập tức thu giấy của tất cả các đội.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-black/40 border border-gold/30 rounded-lg p-5 shadow-inner">
+                        <h3 class="text-[20px] text-gold font-playfair font-bold mb-3 border-b border-gold/20 pb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-map-location-dot text-base"></i> Bản Đồ 42 Ô & Tính Điểm
+                        </h3>
+                        <ul class="space-y-3.5 text-[15px] text-parchment/90">
+                            <li class="relative pl-6"><span class="absolute left-0 text-gold">🎯</span><strong>Điểm số:</strong> Trả lời đúng mỗi câu được cộng <strong>+1 điểm</strong>.</li>
+                            <li class="relative pl-6"><span class="absolute left-0 text-gold">🔍</span><strong>Manh mối:</strong> Trả lời đúng sẽ giúp đội chơi nhận được manh mối định vị Sư phụ trên bản đồ 42 ô.</li>
+                            <li class="relative pl-6"><span class="absolute left-0 text-gold">🏆</span><strong>Giải cứu Sư Phụ:</strong> Đội chốt trúng ô chứa Đường Tăng đầu tiên nhận <strong>+20đ</strong>, đội thứ hai <strong>+15đ</strong>, đội thứ ba <strong>+10đ</strong>, đội cuối <strong>+5đ</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="text-gold/80 font-medium">Luật Chơi</span>
+                <div class="nav-controls">
+                    <button class="nav-btn" onclick="prevSlide()">Trước</button>
+                    <button class="nav-btn" onclick="nextSlide()">Tiếp theo</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: PHẦN 1 - GIẢI MÃ Ô CHỮ HÀNG DỌC -->
+        <div class="slide" id="slide3">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-[26px] uppercase font-playfair text-[#dfb15b]">TRẬN ĐỒ Ô CHỮ PHONG ẤN</h2>
+                <span class="bg-gold/15 border border-gold text-gold px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Từ khóa bí ẩn dọc (10 chữ cái)</span>
+            </div>
+            <div class="content-body" style="justify-content: flex-start; gap: 15px;">
+                <div class="flex flex-col items-center bg-black/45 border border-gold/30 rounded-xl p-4 shadow-2xl relative">
+                    <div class="absolute top-2 right-2 flex gap-2">
+                        <button class="bg-gold text-inkBlack text-xs font-bold px-3 py-1 rounded hover:scale-105 transition" onclick="revealEntireCrossword()">Mở tất cả</button>
+                    </div>
+                    
+                    <div class="flex flex-col gap-1" id="crossword-grid">
+                        <!-- Sinh tự động bằng JS -->
+                    </div>
+                </div>
+
+                <div class="w-full bg-black/30 border border-gold/20 rounded p-4 flex justify-between items-center text-left">
+                    <div class="max-w-[70%]">
+                        <h4 class="text-gold font-bold border-b border-gold/20 pb-1 mb-2 text-sm"><i class="fa-solid fa-circle-info mr-2"></i>Hướng dẫn giải mã từ khóa dọc</h4>
+                        <p class="text-xs text-parchment/80 leading-relaxed">
+                            Sau khi đã giải mã xong 5 câu hỏi, hãy kích hoạt <strong>"Lá bùa từ khóa dọc"</strong> để kiểm tra đáp án cốt lõi của Trận Đồ Phong Ấn trước khi hoàn thành chặng hành trình giải cứu.
+                        </p>
+                    </div>
+                    <div>
+                        <button class="bg-gradient-to-r from-red-700 to-red-950 text-gold border border-gold/50 font-bold px-6 py-3 rounded hover:scale-105 transition flex items-center gap-2 shadow-lg text-sm" onclick="showVerticalKeyQuestion()">
+                            <i class="fa-solid fa-key"></i> Lá Bùa Dọc
+                        </button>
+                    </div> 
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="text-gold/80 font-medium">Trận Đồ Ô Chữ</span>
+                <div class="nav-controls">
+                    <button class="nav-btn" onclick="prevSlide()">Trước</button>
+                    <button class="nav-btn" onclick="goToPart2()">Tiếp theo</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: PHẦN 2 - 14 CÂU HỎI RIÊNG -->
+        <div class="slide" id="slide4">
+            <h2 class="text-[30px] uppercase font-playfair text-amber-300 mb-4">PHẦN 2: THỬ THÁCH 14 CÂU HỎI RIÊNG</h2>
+            <div class="content-body text-parchment/90 leading-relaxed" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; text-align: center;">
+                <div class="bg-black/40 border border-amber-400/20 rounded-3xl p-8 shadow-2xl w-full max-w-[860px]">
+                    <h3 class="text-[22px] text-gold font-playfair font-bold mb-6 border-b border-gold/20 pb-3">CÁCH TÍNH ĐIỂM</h3>
+                    <div class="grid grid-cols-1 gap-4 text-left text-[15px] text-parchment/90">
+                        <div class="flex items-start gap-3 bg-black/30 p-4 rounded-lg border border-gold/20">
+                            <span class="text-gold font-bold text-xl min-w-[40px]">+1đ</span>
+                            <span>Trả lời đúng mỗi câu hỏi</span>
+                        </div>
+                        <div class="flex items-start gap-3 bg-black/30 p-4 rounded-lg border border-gold/20">
+                            <span class="text-gold font-bold text-xl min-w-[40px]">+5đ</span>
+                            <span>Đội chốt trúng ô Sư Phụ thứ tư</span>
+                        </div>
+                        <div class="flex items-start gap-3 bg-black/30 p-4 rounded-lg border border-gold/20">
+                            <span class="text-gold font-bold text-xl min-w-[40px]">+10đ</span>
+                            <span>Đội chốt trúng ô Sư Phụ thứ ba</span>
+                        </div>
+                        <div class="flex items-start gap-3 bg-black/30 p-4 rounded-lg border border-gold/20">
+                            <span class="text-gold font-bold text-xl min-w-[40px]">+15đ</span>
+                            <span>Đội chốt trúng ô Sư Phụ thứ hai</span>
+                        </div>
+                        <div class="flex items-start gap-3 bg-black/30 p-4 rounded-lg border border-gold/20">
+                            <span class="text-gold font-bold text-xl min-w-[40px]">+20đ</span>
+                            <span>Đội chốt trúng ô Sư Phụ đầu tiên</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span class="text-amber-300/80 font-medium">Phần 2</span>
+                <div class="nav-controls">
+                    <button class="nav-btn" onclick="prevSlide()">Trước</button>
+                    <button class="nav-btn" onclick="startPart2()">Bắt đầu phần 2</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CÁC SLIDE CÂU HỎI CHI TIẾT SẼ ĐƯỢC CHÈN BẰNG JAVASCRIPT ĐỘNG NGAY BÊN DƯỚI -->
+        <script>
+            // - Gồm: 14 câu hỏi riêng của Phần 2
+            const part2QuestionsData = [
+                {
+                    qNum: 1,
+                    slideIdx: 5,
+                    q: "Câu 1: Khi nghiên cứu về lịch sử công nghiệp hóa của Việt Nam, một bạn học sinh khẳng định: “Đại hội VIII (1996) là Đại hội đầu tiên chính thức định danh phạm trù Công nghiệp hóa, hiện đại hóa trong Văn kiện”. Lời khẳng định này đúng hay sai?",
+                    options: [
+                        "A. Đúng, vì Đại hội VIII mới là mốc nước ta bước vào thời kỳ đẩy mạnh CNH, HĐH.",
+                        "B. Sai, vì phạm trù này đã được xác định chính thức từ Văn kiện Đại hội VII (1991), Đại hội VIII chỉ là mốc quyết định đưa đất nước sang thời kỳ đẩy mạnh tiến trình đó.",
+                        "C. Sai, vì phạm trù này thực chất đã có từ Hiến pháp năm 1980.",
+                        "D. Đúng, vì Văn kiện Đại hội VII chỉ dùng thuật ngữ 'Công nghiệp hóa hướng về xuất khẩu'."
+                    ],
+                    a: "B. Sai, vì phạm trù này đã được xác định chính thức từ Văn kiện Đại hội VII (1991), Đại hội VIII chỉ là mốc quyết định đưa đất nước sang thời kỳ đẩy mạnh tiến trình đó.",
+                    d: "Đại hội VII đã chính thức xác định phạm trù công nghiệp hóa, hiện đại hóa trong Văn kiện 1991."
+                },
+                {
+                    qNum: 2,
+                    slideIdx: 6,
+                    q: "Câu 2: So với các Đại hội trước năm 1986, điểm khác biệt quan trọng nhất của Đại hội VI là:",
+                    options: [
+                        "A. Tiếp tục duy trì cơ chế tập trung quan liêu bao cấp",
+                        "B. Bước đầu đổi mới tư duy kinh tế và cơ chế quản lý đất nước",
+                        "C. Chỉ tập trung phát triển công nghiệp nặng",
+                        "D. Thu hẹp quan hệ hợp tác quốc tế để ổn định kinh tế trong nước"
+                    ],
+                    a: "B. Bước đầu đổi mới tư duy kinh tế và cơ chế quản lý đất nước",
+                    d: "Đại hội VI đánh dấu bước đầu đổi mới tư duy kinh tế và cơ chế quản lý, chứ không giữ nguyên cơ chế quan liêu bao cấp."
+                },
+                {
+                    qNum: 3,
+                    slideIdx: 7,
+                    q: "Câu 3: Trong đường lối công nghiệp hóa đất nước, Đại hội Đảng VII xác định lĩnh vực nào là nhiệm vụ quan trọng hàng đầu?",
+                    options: [
+                        "A. Ưu tiên phát triển công nghiệp nặng và cơ khí chế tạo máy.",
+                        "B. Phát triển mạnh mẽ công nghiệp công nghệ cao và kinh tế số.",
+                        "C. Phát triển nông nghiệp và nông thôn.",
+                        "D. Phát triển hệ thống hạ tầng giao thông và đô thị hóa."
+                    ],
+                    a: "C. Phát triển nông nghiệp và nông thôn.",
+                    d: "Đại hội VII xác định nông nghiệp và nông thôn là nhiệm vụ quan trọng hàng đầu trong giai đoạn đầu của công nghiệp hóa."
+                },
+                {
+                    qNum: 4,
+                    slideIdx: 8,
+                    q: "Câu 4: Cho các lĩnh vực và nội dung sau của Đại hội VI (1986):\n1. Kinh tế a. Đa dạng hóa quan hệ quốc tế\n2. Đối ngoại b. Xóa bỏ bao cấp\n3. Công nghiệp hóa c. Phát huy quyền làm chủ tập thể của nhân dân lao động\n4. Hệ thống chính trị d. Nông nghiệp là mặt trận hàng đầu\nPhương án ghép đúng là:",
+                    options: [
+                        "A. 1-b, 2-a, 3-d, 4-c",
+                        "B. 1-c, 2-b, 3-d, 4-a",
+                        "C. 1-b, 2-d, 3-c, 4-a",
+                        "D. 1-d, 2-c, 3-b, 4-a"
+                    ],
+                    a: "A. 1-b, 2-a, 3-d, 4-c",
+                    d: "Đại hội VI tập trung xóa bỏ bao cấp trong kinh tế, đa dạng hóa quan hệ đối ngoại, xác định nông nghiệp là mặt trận hàng đầu và phát huy quyền làm chủ tập thể."
+                },
+                {
+                    qNum: 5,
+                    slideIdx: 9,
+                    q: "Câu 5: Điền từ vào chỗ trống: “Nền kinh tế có những bước phát triển... bước đầu hình thành nền ______________ (1) ______________, vận hành theo ______________ (2) ______________ có sự quản lý của Nhà nước...",
+                    options: [
+                        "A. (1) kinh tế hàng hóa nhiều thành phần / (2) cơ chế thị trường",
+                        "B. (1) kinh tế thị trường định hướng xã hội chủ nghĩa / (2) cơ chế quản lý mới",
+                        "C. (1) kinh tế hàng hóa nhiều thành phần / (2) cơ chế kế hoạch hóa tập trung",
+                        "D. (1) kinh tế thị trường / (2) quy luật cung cầu"
+                    ],
+                    a: "B. (1) kinh tế thị trường định hướng xã hội chủ nghĩa / (2) cơ chế quản lý mới",
+                    d: "Đại hội VI khởi đầu xây dựng nền kinh tế thị trường định hướng xã hội chủ nghĩa dưới sự quản lý mới của Nhà nước."
+                },
+                {
+                    qNum: 6,
+                    slideIdx: 10,
+                    q: "Câu 6: Hội nghị Trung ương lần thứ hai (4/1987) sau Đại hội VI đã tập trung giải quyết vấn đề nóng bỏng và cấp bách nhất nào?",
+                    options: [
+                        "A. Xây dựng Hiến pháp mới.",
+                        "B. Giải quyết vấn đề lưu thông phân phối.",
+                        "C. Bầu bổ sung nhân sự Bộ Chính trị.",
+                        "D. Thiết lập quan hệ ngoại giao với các nước phương Tây."
+                    ],
+                    a: "B. Giải quyết vấn đề lưu thông phân phối.",
+                    d: "Hội nghị TW 2/1987 tập trung vào giải quyết khó khăn trong lưu thông, phân phối, một vấn đề cấp bách sau Đổi mới."
+                },
+                {
+                    qNum: 7,
+                    slideIdx: 11,
+                    q: "Câu 7: So với Đại hội VI (1986), điểm phát triển nổi bật trong đường lối đối ngoại của Đại hội VII (1991) là:",
+                    options: [
+                        "A. Tiếp tục mở rộng quan hệ hợp tác kinh tế, khoa học – kỹ thuật với nhiều quốc gia trên thế giới",
+                        "B. Nhấn mạnh rõ hơn chủ trương đa phương hóa, đa dạng hóa quan hệ quốc tế",
+                        "C. Tăng cường kết hợp đối ngoại với nhiệm vụ giữ vững ổn định chính trị và bảo vệ Tổ quốc",
+                        "D. Đẩy mạnh hợp tác quốc tế nhằm phục vụ công cuộc công nghiệp hóa, hiện đại hóa đất nước"
+                    ],
+                    a: "B. Nhấn mạnh rõ hơn chủ trương đa phương hóa, đa dạng hóa quan hệ quốc tế",
+                    d: "Đại hội VII nhấn mạnh đa phương hóa và đa dạng hóa quan hệ quốc tế là điểm mới nổi bật trong đối ngoại."
+                },
+                {
+                    qNum: 8,
+                    slideIdx: 12,
+                    q: "Câu 8: Về cơ chế quản lý kinh tế, điểm khác biệt 'then chốt' trong cách diễn đạt về kế hoạch hóa của Đại hội VI so với thời kỳ trước đó là gì?",
+                    options: [
+                        "A. Kế hoạch hóa vẫn là mệnh lệnh hành chính nhưng được giao quyền tự chủ cho doanh nghiệp.",
+                        "B. Xóa bỏ hoàn toàn kế hoạch hóa để vận hành theo cơ chế thị trường tự do.",
+                        "C. Kế hoạch hóa dựa trên cơ sở tôn trọng quy luật thị trường, sử dụng công cụ kinh tế để điều tiết vĩ mô.",
+                        "D. Kế hoạch hóa tập trung nhưng có sự quản lý chặt chẽ hơn của bộ máy Nhà nước."
+                    ],
+                    a: "C. Kế hoạch hóa dựa trên cơ sở tôn trọng quy luật thị trường, sử dụng công cụ kinh tế để điều tiết vĩ mô.",
+                    d: "Đại hội VI đã thay đổi cách nhìn về kế hoạch hóa, nhấn mạnh phải tôn trọng quy luật thị trường."
+                },
+                {
+                    qNum: 9,
+                    slideIdx: 13,
+                    q: "Câu 9: Trong nội dung về xã hội, Văn kiện Đại hội VII xác định mục tiêu cốt lõi nào sau đây?",
+                    options: [
+                        "A. Thực hiện dân giàu, nước mạnh, dân chủ, công bằng, văn minh.",
+                        "B. Thực hiện dân giàu, nước mạnh, tiến lên hiện đại trong một xã hội nhân dân làm chủ, nhân ái, có văn hoá, có kỷ cương, xoá bỏ áp bức, bất công.",
+                        "C. Thực hiện dân giàu, nước mạnh, xã hội dân chủ, công bằng, văn minh, mọi người có cuộc sống ấm no, tự do, hạnh phúc.",
+                        "D. Thực hiện dân giàu, nước mạnh, tiến lên hiện đại, xóa bỏ hoàn toàn tình trạng áp bức, bóc lột, bất công trong xã hội."
+                    ],
+                    a: "B. Thực hiện dân giàu, nước mạnh, tiến lên hiện đại trong một xã hội nhân dân làm chủ, nhân ái, có văn hoá, có kỷ cương, xoá bỏ áp bức, bất công.",
+                    d: "Đại hội VII đặt mục tiêu xây dựng xã hội nhân dân làm chủ, nhân ái, văn hoá, có kỷ cương và công bằng."
+                },
+                {
+                    qNum: 10,
+                    slideIdx: 14,
+                    q: "Câu 10: Vị trí của Khoa học - Kỹ thuật được Đại hội VI xác định như thế nào?",
+                    options: [
+                        "A. Là công cụ hỗ trợ để ổn định tình hình lương thực.",
+                        "B. Là nền tảng để xây dựng hệ thống chính trị vững mạnh.",
+                        "C. Là một động lực to lớn, có vị trí then chốt.",
+                        "D. Là lĩnh vực ưu tiên sau khi đã hoàn thành 3 chương trình kinh tế."
+                    ],
+                    a: "C. Là một động lực to lớn, có vị trí then chốt.",
+                    d: "Đại hội VI khẳng định Khoa học - Kỹ thuật là động lực lớn và có vị trí then chốt cho phát triển."
+                },
+                {
+                    qNum: 11,
+                    slideIdx: 15,
+                    q: "Câu 11: Sự phát triển về tư duy kinh tế của Đảng từ Đại hội VI đến Đại hội VII được thể hiện rõ nét nhất qua việc chuyển trọng tâm từ:",
+                    options: [
+                        "A. Xóa bỏ bao cấp sang xây dựng các tập đoàn kinh tế nhà nước.",
+                        "B. Tập trung vào công nghiệp nặng sang hội nhập kinh tế quốc tế.",
+                        "C. Thực hiện 3 chương trình kinh tế lớn sang vận hành nền kinh tế theo cơ chế thị trường có sự quản lý của Nhà nước.",
+                        "D. Nền kinh tế kế hoạch hóa sang nền kinh tế thị trường định hướng xã hội chủ nghĩa."
+                    ],
+                    a: "C. Thực hiện 3 chương trình kinh tế lớn sang vận hành nền kinh tế theo cơ chế thị trường có sự quản lý của Nhà nước.",
+                    d: "Đại hội VII chuyển trọng tâm từ các chương trình kinh tế cũ sang vận hành nền kinh tế theo cơ chế thị trường có quản lý nhà nước."
+                },
+                {
+                    qNum: 12,
+                    slideIdx: 16,
+                    q: "Câu 12: Đâu là nguyên nhân chủ yếu khiến Đại hội VI (1986) được xem là bước ngoặt của cách mạng Việt Nam?",
+                    options: [
+                        "A. Đảng quyết định ưu tiên phát triển công nghiệp nặng",
+                        "B. Đảng chuyển từ tư duy quản lý bằng bao cấp sang đổi mới toàn diện",
+                        "C. Việt Nam hoàn thành quá trình công nghiệp hóa xã hội chủ nghĩa",
+                        "D. Nhà nước xóa bỏ hoàn toàn cơ chế kế hoạch hóa tập trung ngay sau Đại hội"
+                    ],
+                    a: "B. Đảng chuyển từ tư duy quản lý bằng bao cấp sang đổi mới toàn diện",
+                    d: "Đại hội VI được xem là bước ngoặt bởi nó mở đầu đổi mới toàn diện, không còn tư duy bao cấp."
+                },
+                {
+                    qNum: 13,
+                    slideIdx: 17,
+                    q: "Câu 13: Điểm cốt lõi trong đường lối phát triển đất nước của Đại hội VII là:",
+                    options: [
+                        "A. Ưu tiên tuyệt đối công nghiệp nặng",
+                        "B. Kết hợp đổi mới kinh tế với ổn định chính trị - xã hội",
+                        "C. Xóa bỏ cơ chế quản lý của Nhà nước",
+                        "D. Chỉ tập trung phát triển đối ngoại"
+                    ],
+                    a: "B. Kết hợp đổi mới kinh tế với ổn định chính trị - xã hội",
+                    d: "Đại hội VII nhấn mạnh phải kết hợp đổi mới kinh tế với ổn định chính trị và xã hội."
+                },
+                {
+                    qNum: 14,
+                    slideIdx: 18,
+                    q: "Câu 14: Đại hội VI xác định nhóm chính sách xã hội nào là 'nhân tố con người' thiết thực nhất trong sự nghiệp xây dựng và bảo vệ Tổ quốc?",
+                    options: [
+                        "A. Thực hiện công bằng xã hội và bảo đảm an toàn xã hội cho mọi tầng lớp.",
+                        "B. Kế hoạch hóa dân số và giải quyết việc làm cho người lao động.",
+                        "C. Chăm lo đáp ứng các nhu cầu giáo dục, văn hóa và sức khỏe.",
+                        "D. Xây dựng chính sách bảo trợ xã hội cho người có công."
+                    ],
+                    a: "C. Chăm lo đáp ứng các nhu cầu giáo dục, văn hóa và sức khỏe.",
+                    d: "Đại hội VI nhấn mạnh con người qua chính sách giáo dục, văn hóa và y tế, xem đó là nhân tố then chốt."
+                }
+            ];
+
+            // - Gồm: 5 câu lật ô chữ (Lá bùa 1 đến 5)
+            const part1QuestionsData = [
+                {
+                    qNum: 1,
+                    slideIdx: 19,
+                    rowIdx: 0, // ĐA PHƯƠNG
+                    q: "Lá bùa 01: Đại hội VI chủ trương mở rộng quan hệ đối ngoại theo hướng đa dạng hóa và __________ hóa quan hệ quốc tế.",
+                    options: ["A. toàn cầu", "B. hiện đại", "C. đa phương", "D. khu vực"],
+                    a: "C. ĐA PHƯƠNG",
+                    d: "Đại hội VI đề cao đa phương hóa quan hệ quốc tế để mở rộng đối ngoại."
+                },
+                {
+                    qNum: 2,
+                    slideIdx: 20,
+                    rowIdx: 2, // BẢO VỆ
+                    q: "Lá bùa 02: Đại hội VI chủ trương kết hợp chặt chẽ nhiệm vụ xây dựng và __________ Tổ quốc xã hội chủ nghĩa.",
+                    options: ["A. đổi mới", "B. phát triển", "C. bảo vệ", "D. công nghiệp hóa"],
+                    a: "C. BẢO VỆ",
+                    d: "Đại hội VI khẳng định kết hợp chặt chẽ xây dựng với bảo vệ Tổ quốc xã hội chủ nghĩa."
+                },
+                {
+                    qNum: 3,
+                    slideIdx: 21,
+                    rowIdx: 3, // MẶT TRẬN
+                    q: "Lá bùa 03: Đại hội VI xác định nông nghiệp là __________ hàng đầu trong chặng đường đầu của thời kỳ quá độ.",
+                    options: ["A. nhiệm vụ chiến lược", "B. mặt trận", "C. mục tiêu trọng tâm", "D. lĩnh vực ưu tiên tuyệt đối"],
+                    a: "B. MẶT TRẬN",
+                    d: "Đại hội VI xác định nông nghiệp là mặt trận hàng đầu trong giai đoạn quá độ."
+                },
+                {
+                    qNum: 4,
+                    slideIdx: 22,
+                    rowIdx: 5, // TỘI ÁC
+                    q: "Lá bùa 04: Chọn cụm từ chính xác điền vào chỗ trống theo Văn kiện Đại hội Đảng VII: “Mọi hành vi gây tổn hại đến lợi ích của nhân dân và của xã hội đều phải được xem là ..., phải được xử lý nghiêm khắc theo luật pháp nhà nước, không miễn trừ bất kỳ ai.”",
+                    options: ["A. khuyết điểm lớn", "B. tội ác", "C. sự cố đáng tiếc", "D. vấn đề nội bộ"],
+                    a: "B. TỘI ÁC",
+                    d: "Đại hội VII xác định mọi hành vi gây hại đến lợi ích nhân dân đều là tội ác và phải xử lý nghiêm."
+                },
+                {
+                    qNum: 5,
+                    slideIdx: 23,
+                    rowIdx: 9, // BẠN
+                    q: "Lá bùa 05: Chọn cụm từ chính xác để hoàn thiện phương châm đối ngoại được nêu trong Văn kiện Đại hội VII: “Việt Nam muốn là ______ với tất cả các nước trong cộng đồng thế giới.”",
+                    options: ["A. đối tác tin cậy", "B. thành viên có trách nhiệm", "C. bạn", "D. cầu nối chiến lược"],
+                    a: "C. BẠN",
+                    d: "Đại hội VII nêu rõ Việt Nam muốn là bạn với tất cả các nước."
+                }
+            ];
+
+            // 1 Câu hỏi từ khóa dọc đặc biệt (Slide 24)
+            const verticalKeyQuestionData = {
+                slideIdx: 24,
+                q: "Lá bùa Đặc Biệt (Giải mã từ khóa dọc): Từ khóa phong ấn cốt lõi gồm 10 chữ cái thể hiện chủ trương kinh tế & xã hội xuyên suốt của Đảng ta trong thời kỳ Đổi Mới, mang tên là gì?",
+                options: [
+                    "A. CÔNG NGHIỆP HÓA",
+                    "B. TOÀN CẦU HÓA",
+                    "C. HIỆN ĐẠI HÓA",
+                    "D. ĐA PHƯƠNG HÓA"
+                ],
+                a: "C. HIỆN ĐẠI HÓA",
+                d: "Đây chính là từ khóa chìa khóa chạy xuyên suốt trận pháp bùa yêu, gắn liền với định hướng phát triển đất nước bền vững!"
+            };
+
+            let slideHTML = '';
+            
+            // Tạo slide 14 câu hỏi phần 2 (Đã đổi sang theme gold/red)
+            part2QuestionsData.forEach((item, idx) => {
+                let optionsHTML = '';
+                item.options.forEach(opt => {
+                    optionsHTML += `
+                        <div class="bg-black/30 border border-gold/25 p-2 rounded text-parchment/90 text-[14px] font-semibold flex items-center gap-2 pl-4">
+                            <i class="fa-solid fa-bahai text-gold text-xs"></i> ${opt}
+                        </div>
+                    `;
+                });
+
+                const nextSlide = idx < part2QuestionsData.length - 1 ? item.slideIdx + 1 : 25;
+                const prevSlide = idx > 0 ? part2QuestionsData[idx - 1].slideIdx : 4;
+                slideHTML += `
+                <div class="slide" id="slide${item.slideIdx}">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-[26px] uppercase font-playfair text-gold">PHẦN 2 - CÂU ${item.qNum}</h2>
+                        <span class="bg-gold/15 border border-gold text-gold px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Phần 2</span>
+                    </div>
+                    <div class="content-body">
+                        <div class="amulet-question-box text-[18px] mb-4 leading-relaxed">
+                            ${item.q}
+                        </div>
+                        <div class="grid grid-cols-1 gap-3">
+                            ${optionsHTML}
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 items-center bg-black/20 p-3 rounded-lg border border-gold/10 mt-4">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="relative flex items-center justify-center">
+                                    <svg class="w-[100px] h-[100px] -rotate-90">
+                                        <circle class="fill-none stroke-white/10 stroke-[6]" cx="50" cy="50" r="44"></circle>
+                                        <circle class="timer-bar !stroke-gold" id="timer-bar-p2-${item.qNum}" cx="50" cy="50" r="44" style="stroke-dasharray: 276;"></circle>
+                                    </svg>
+                                    <span class="absolute text-[26px] font-playfair font-bold text-gold" id="timer-text-p2-${item.qNum}">20</span>
+                                </div>
+                                <button class="mt-2 bg-red-900/40 border border-red-500/50 text-parchment px-3 py-1 rounded hover:bg-red-800 hover:text-white text-xs font-semibold transition animate-pulse" onclick="startTimerP2(${item.qNum}, 20)">
+                                    Thảo luận 20s
+                                </button>
+                            </div>
+                            <div class="answer-reveal-box" id="answer-box-p2-${item.qNum}">
+                                <button class="nav-btn bg-gold text-inkBlack font-bold px-4 py-2 rounded shadow transition text-xs hover:scale-105" id="btn-reveal-p2-${item.qNum}" onclick="revealAnswerP2(${item.qNum})">Xem Đáp Án</button>
+                                <span class="hidden text-[17px] font-bold text-gold mb-1 text-center" id="ans-txt-p2-${item.qNum}">ĐÁP ÁN: ${item.a}</span>
+                                <span class="hidden text-[11px] text-parchment/90 italic text-center" id="ans-desc-p2-${item.qNum}">${item.d}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="text-gold/80 font-medium">Phần 2 - Câu ${item.qNum}</span>
+                        <div class="nav-controls">
+                            <button class="nav-btn" onclick="goToSlide(${prevSlide})">Quay lại</button>
+                            <button class="nav-btn" onclick="goToSlide(${nextSlide})">Tiếp theo</button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }); 
+
+            // Tạo slide 5 câu hỏi lật ô chữ (Lá bùa 1 đến 5)
+            part1QuestionsData.forEach((item) => {
+                let optionsHTML = '';
+                item.options.forEach(opt => {
+                    optionsHTML += `
+                        <div class="bg-black/30 border border-gold/25 p-2 rounded text-parchment/90 text-[14px] font-semibold flex items-center gap-2 pl-4">
+                            <i class="fa-solid fa-bahai text-gold text-xs"></i> ${opt}
+                        </div>
+                    `;
+                });
+
+                slideHTML += `
+                <div class="slide" id="slide${item.slideIdx}">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-[26px] uppercase font-playfair text-gold">LÁ BÙA 0${item.qNum}</h2>
+                        <span class="bg-gold/15 border border-gold text-gold px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Phong Ấn</span>
+                    </div>
+                    <div class="content-body">
+                        <div class="amulet-question-box text-[18px] mb-4 leading-relaxed">
+                            ${item.q}
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 items-center">
+                            <div class="grid grid-cols-1 gap-2">
+                                ${optionsHTML}
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 items-center bg-black/20 p-3 rounded-lg border border-gold/10">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div class="relative flex items-center justify-center">
+                                        <svg class="w-[100px] h-[100px] -rotate-90">
+                                            <circle class="fill-none stroke-white/10 stroke-[6]" cx="50" cy="50" r="44"></circle>
+                                            <circle class="timer-bar" id="timer-bar-p1-${item.qNum}" cx="50" cy="50" r="44" style="stroke-dasharray: 276;"></circle>
+                                        </svg>
+                                        <span class="absolute text-[26px] font-playfair font-bold text-gold" id="timer-text-p1-${item.qNum}">20</span>
+                                    </div>
+                                    <button class="mt-2 bg-red-900/40 border border-red-500/50 text-parchment px-3 py-1 rounded hover:bg-red-800 hover:text-white text-xs font-semibold transition animate-pulse" onclick="startTimerP1(${item.qNum}, 20)">
+                                        Thảo luận 20s
+                                    </button>
+                                </div>
+                                <div class="answer-reveal-box" id="answer-box-p1-${item.qNum}">
+                                    <button class="nav-btn bg-gold text-inkBlack font-bold px-4 py-2 rounded shadow transition text-xs hover:scale-105" id="btn-reveal-p1-${item.qNum}" onclick="revealAnswerP1(${item.qNum})">Xem Đáp Án</button>
+                                    <span class="hidden text-[17px] font-bold text-gold mb-1 text-center" id="ans-txt-p1-${item.qNum}">ĐÁP ÁN: ${item.a}</span>
+                                    <span class="hidden text-[11px] text-parchment/90 italic text-center" id="ans-desc-p1-${item.qNum}">${item.d}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-footer">
+                        <span class="text-gold/80 font-medium">Lá Bùa Phong Ấn ${item.qNum}</span>
+                        <div class="nav-controls">
+                            <button class="bg-gradient-to-r from-amber-700 to-amber-950 text-white font-bold px-6 py-2.5 rounded-lg border border-gold/40 hover:scale-105 active:scale-95 transition flex items-center gap-2 text-xs shadow-lg" onclick="backAndRevealCrossword(${item.qNum})">
+                                <i class="fa-solid fa-arrow-left-long"></i> Quay lại
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+
+            // Tạo slide câu hỏi từ khóa dọc đặc biệt
+            let verticalOptionsHTML = '';
+            verticalKeyQuestionData.options.forEach(opt => {
+                verticalOptionsHTML += `
+                    <div class="bg-black/30 border border-gold/25 p-2 rounded text-parchment/90 text-[14px] font-semibold flex items-center gap-2 pl-4">
+                        <i class="fa-solid fa-key text-gold text-xs"></i> ${opt}
+                    </div>
+                `;
+            });
+
+            slideHTML += `
+            <div class="slide" id="slide${verticalKeyQuestionData.slideIdx}">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-[26px] uppercase font-playfair text-[#f4d03f] flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> LÁ BÙA ĐẶC BIỆT: TỪ KHÓA DỌC
+                    </h2>
+                    <span class="bg-amber-500/15 border border-amber-500 text-amber-500 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Phá Giải Phong Ấn Cốt Lõi</span>
+                </div>
+                <div class="content-body">
+                    <div class="amulet-question-box text-[18px] mb-4 leading-relaxed">
+                        ${verticalKeyQuestionData.q}
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 items-center">
+                        <div class="grid grid-cols-1 gap-2">
+                            ${verticalOptionsHTML}
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 items-center bg-black/20 p-3 rounded-lg border border-amber-500/20">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="relative flex items-center justify-center">
+                                    <svg class="w-[100px] h-[100px] -rotate-90">
+                                        <circle class="fill-none stroke-white/10 stroke-[6]" cx="50" cy="50" r="44"></circle>
+                                        <circle class="timer-bar !stroke-amber-500" id="timer-bar-vertical" cx="50" cy="50" r="44" style="stroke-dasharray: 276;"></circle>
+                                    </svg>
+                                    <span class="absolute text-[26px] font-playfair font-bold text-amber-500" id="timer-text-vertical">20</span>
+                                </div>
+                                <button class="mt-2 bg-amber-900/40 border border-amber-500/50 text-parchment px-3 py-1 rounded hover:bg-amber-800 hover:text-white text-xs font-semibold transition animate-pulse" onclick="startTimerVertical(20)">
+                                    Thảo luận 20s
+                                </button>
+                            </div>
+                            <div class="answer-reveal-box" id="answer-box-vertical">
+                                <button class="nav-btn !border-amber-500 !text-amber-500 bg-black/40 font-bold px-4 py-2 rounded shadow transition text-xs hover:scale-105" id="btn-reveal-vertical" onclick="revealAnswerVertical()">Giải Mã Từ Khóa Dọc</button>
+                                <span class="hidden text-[17px] font-bold text-amber-500 mb-1 text-center" id="ans-txt-vertical">ĐÁP ÁN: ${verticalKeyQuestionData.a}</span>
+                                <span class="hidden text-[11px] text-parchment/90 italic text-center" id="ans-desc-vertical">${verticalKeyQuestionData.d}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span class="text-amber-500/80 font-medium">Lá Bùa Phong Ấn Dọc</span>
+                    <div class="nav-controls">
+                        <button class="bg-gradient-to-r from-amber-700 to-amber-950 text-white font-bold px-6 py-2.5 rounded-lg border border-gold/40 hover:scale-105 active:scale-95 transition flex items-center gap-2 text-xs shadow-lg" onclick="backAndRevealVerticalKey()">
+                            <i class="fa-solid fa-arrow-left-long"></i> Quay lại
+                        </button>
+                    </div>
+                </div>
+            </div>
+            `;
+
+            document.write(slideHTML);
+        </script>
+
+        <!-- SLIDE KẾT THÚC (25) -->
+        <div class="slide" id="slide25">
+            <h3 class="tracking-[5px] uppercase text-[18px] opacity-80 text-center font-semibold text-gold mb-2">Hào Quang Phật Pháp</h3>
+            <div class="content-body text-center max-w-[850px] mx-auto">
+                <div class="text-[65px] text-gold mb-4 animate-bounce">
+                    <i class="fa-solid fa-hands-praying animate-pulse"></i>
+                </div>
+                <h1 class="text-[40px] font-playfair font-bold uppercase mb-4 leading-snug tracking-wide text-gold">SƯ PHỤ ĐƯỢC GIẢI CỨU!</h1>
+                <p class="text-[16px] text-parchment/90 leading-relaxed mb-6">
+                    Mọi lá bùa phong ấn của Bạch Cốt Tinh đã bị phá vỡ trước trí tuệ xuất chúng của các đồ đệ. <br>
+                    Bản đồ trận pháp đã được hóa giải. Đường Tăng an toàn thoát nạn sâu thẳm trong động bàn tơ. <br>
+                    Hành trình hướng về Tây Trúc thỉnh Chân Kinh lại tiếp tục rực rỡ quang minh!
+                </p>
+                <span class="bg-gold/15 border border-gold text-gold px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider inline-block">
+                    Hãy kiểm tra Bảng Điểm chung cuộc để vinh danh Đội chiến thắng!
+                </span>
+            </div>
+            <div class="slide-footer">
+                <span class="text-gold/80 font-medium">Hoàn Thành Sứ Mệnh</span>
+                <div class="nav-controls">
+                    <button class="nav-btn" onclick="goToSlide(18)">Trước</button>
+                    <button class="nav-btn" disabled>Hoàn thành</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOATING CONTROL BUTTONS -->
+        <div class="absolute bottom-4 left-4 z-40 flex gap-3">
+            <button id="scoreboard-btn" class="bg-black/85 hover:bg-gold/20 border border-gold text-gold p-3 rounded-full shadow-lg transition-all" title="Bảng điểm Đồ đệ">
+                <i class="fa-solid fa-trophy text-lg"></i>
+            </button>
+            <button id="grid-btn" class="bg-black/85 hover:bg-amuletRed/20 border border-amuletRed text-amuletRed p-3 rounded-full shadow-lg transition-all" title="Bản đồ 42 Ô Phong Ấn">
+                <i class="fa-solid fa-map text-lg"></i>
+            </button>
+            <button id="clue-btn" class="bg-black/85 hover:bg-amber-900/40 border border-amber-400 text-amber-400 p-3 rounded-full shadow-lg transition-all" title="Túi Cẩm Nang Manh Mối">
+                <i class="fa-solid fa-scroll text-lg"></i>
+            </button>
+        </div>
+
+        <!-- MODAL BẢN ĐỒ 42 Ô PHONG ẤN -->
+        <div id="grid-modal" class="hidden absolute top-0 left-0 w-full h-full bg-black/95 flex items-center justify-center z-[100] p-4">
+            <div class="bg-gradient-to-b from-darkCrimson to-inkBlack border-2 border-amuletRed rounded-xl p-5 w-[850px] max-w-full shadow-2xl relative">
+                <button onclick="toggleGrid()" class="absolute top-4 right-4 text-gold/60 hover:text-gold text-xl cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <h3 class="font-playfair text-2xl text-gold text-center mb-2 uppercase tracking-wider border-b border-amuletRed/30 pb-2">Trận Đồ Phong Ấn Động Bàn Tơ (42 Ô)</h3>
+                <p class="text-center text-xs text-parchment/70 mb-4 italic font-vietnam">
+                    Hàng của sư phụ là hàng F (6). Click ô: 1 lần = dấu X đỏ | 2 lần = <span class="text-green-400 font-bold font-vietnam">ĐƯỜNG TĂNG (F5)</span> | 3 lần = Hoàn nguyên
+                </p>
+                <div class="grid-container font-vietnam" id="puzzle-grid">
+                    <!-- Sinh tự động bằng JS -->
+                </div>
+                <div class="mt-4 flex justify-center">
+                    <button onclick="toggleGrid()" class="px-8 py-2 bg-gold text-inkBlack rounded hover:bg-darkGold transition font-bold text-sm cursor-pointer shadow-md">Đóng Bản Đồ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL TÚI CẨM NANG MANH MỐI (Đã đổi sang màu amber/gold) -->
+        <div id="clue-modal" class="hidden absolute top-0 left-0 w-full h-full bg-black/95 flex items-center justify-center z-[100] p-4">
+            <div class="bg-gradient-to-b from-darkCrimson to-inkBlack border-2 border-amber-400 rounded-xl p-6 w-[700px] max-w-full shadow-2xl relative">
+                <button onclick="toggleClue()" class="absolute top-4 right-4 text-gold/60 hover:text-gold text-xl cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <h3 class="font-playfair text-2xl text-amber-400 text-center mb-6 uppercase tracking-wider border-b border-amber-400/30 pb-2">Túi Cẩm Nang Manh Mối</h3>
+                
+                <div class="flex flex-col items-center mb-6">
+                    <button onclick="drawClue()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105 active:scale-95 mb-4 border border-amber-300 shadow-amber-500/30">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Bốc Thăm Manh Mối Ngẫu Nhiên
+                    </button>
+                    <div class="w-full min-h-[100px] bg-amber-900/30 border-2 border-dashed border-amber-400/50 rounded-lg p-6 flex items-center justify-center text-center shadow-inner">
+                        <p id="current-clue" class="text-2xl text-parchment font-playfair font-bold">Chưa bốc manh mối nào.</p>
+                    </div>
+                </div>
+
+                <div class="w-full">
+                    <h4 class="text-amber-300 font-bold mb-2 text-sm border-b border-amber-400/20 pb-1 flex justify-between">
+                        <span>Lịch Sử Đã Bốc</span>
+                        <span>Đã bốc: <span id="clue-counter" class="text-parchment font-vietnam">0</span>/22</span>
+                    </h4>
+                    <div id="clue-history" class="h-[150px] overflow-y-auto space-y-2 pr-2 text-sm text-parchment/90 scrollbar-thin font-vietnam">
+                        <!-- Chèn danh sách manh mối bốc bằng JS -->
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-center">
+                    <button onclick="toggleClue()" class="px-8 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 transition font-bold text-sm cursor-pointer shadow-lg shadow-amber-500/20">Đóng Túi Cẩm Nang</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL BẢNG ĐIỂM -->
+        <div id="scoreboard-modal" class="hidden absolute top-0 left-0 w-full h-full bg-black/95 flex items-center justify-center z-[100] p-4">
+            <div class="bg-gradient-to-b from-darkCrimson to-inkBlack border-2 border-gold rounded-xl p-6 w-[750px] max-w-full shadow-2xl relative">
+                <button onclick="toggleScoreboard()" class="absolute top-4 right-4 text-gold/60 hover:text-gold text-xl cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <h3 class="font-playfair text-2xl text-gold text-center mb-6 uppercase tracking-wider border-b border-gold/30 pb-2">Bảng Điểm Đồ Đệ</h3>
+                <div class="space-y-4" id="teams-container">
+                    <!-- Sinh tự động các Đội -->
+                </div>
+                <div class="mt-6 flex justify-between gap-4">
+                    <button id="reset-btn" onclick="askResetConfirmation()" class="flex-1 py-2 border border-red-500/40 text-red-400 rounded hover:bg-red-950/20 transition font-semibold text-sm cursor-pointer">Đặt lại điểm</button>
+                    <div id="reset-confirm-zone" class="hidden flex-1 flex gap-2">
+                        <button onclick="confirmReset(true)" class="flex-1 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition font-bold text-xs cursor-pointer">Có, xóa!</button>
+                        <button onclick="confirmReset(false)" class="flex-1 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition font-bold text-xs cursor-pointer">Hủy</button>
+                    </div>
+                    <button onclick="toggleScoreboard()" class="flex-1 py-2 bg-gold text-inkBlack rounded hover:bg-darkGold transition font-bold text-sm cursor-pointer shadow-md">Đóng</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+        window.addEventListener('click', () => {
+            initAudio();
+            loadEmbeddedLaugh().catch(() => {});
+        }, {once: true});
+
+        // Embedded audio support: external MP3 file and warmup
+        let embeddedLaughAudio = null;
+        let embeddedLaughLoaded = false;
+
+        async function loadEmbeddedLaugh() {
+            if (embeddedLaughLoaded) return;
+            try {
+                const audioUrl = 'snaptt.me-89897953.mp3';
+                embeddedLaughAudio = new Audio(audioUrl);
+                embeddedLaughAudio.preload = 'auto';
+                embeddedLaughAudio.volume = 0.8;
+                if (!audioCtx) initAudio();
+                if (audioCtx && audioCtx.decodeAudioData) {
+                    fetch(audioUrl)
+                        .then(resp => resp.arrayBuffer())
+                        .then(buf => audioCtx.decodeAudioData(buf))
+                        .catch(() => {});
+                }
+                embeddedLaughLoaded = true;
+            } catch (err) {
+                console.warn('Không thể tải embedded laugh:', err);
+                embeddedLaughLoaded = false;
+            }
+        }
+
+        // Hàm phát âm thanh cười: ưu tiên file audio, fallback sang WebAudio tổng hợp
+        function playLaugh() {
+            if (!audioCtx) initAudio();
+            if (!embeddedLaughLoaded) loadEmbeddedLaugh().catch(() => {});
+            if (embeddedLaughLoaded && embeddedLaughAudio) {
+                try {
+                    embeddedLaughAudio.currentTime = 0;
+                    const p = embeddedLaughAudio.play();
+                    if (p && typeof p.catch === 'function') {
+                        p.catch(e => {
+                            console.warn('play embedded error', e);
+                            synthLaugh();
+                        });
+                    }
+                    return;
+                } catch (e) {
+                    console.warn('Embedded play failed:', e);
+                }
+            }
+
+            // Fallback: use synthesized laugh if embedded audio unavailable
+            synthLaugh();
+        }
+
+        function synthLaugh() {
+            if (!audioCtx) initAudio();
+            const now = audioCtx.currentTime;
+            for (let i = 0; i < 5; i++) {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                const filter = audioCtx.createBiquadFilter();
+                osc.type = 'sawtooth';
+                const start = now + i * 0.08;
+                osc.frequency.setValueAtTime(220 + i * 60, start);
+                osc.frequency.exponentialRampToValueAtTime(180 + i * 30, start + 0.06);
+                gain.gain.setValueAtTime(0.15, start);
+                gain.gain.exponentialRampToValueAtTime(0.001, start + 0.12);
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(1200 - i * 150, start);
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(start);
+                osc.stop(start + 0.12);
+            }
+            const bufferSize = Math.floor(0.4 * audioCtx.sampleRate);
+            const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * 0.002;
+            const noiseSrc = audioCtx.createBufferSource();
+            noiseSrc.buffer = noiseBuffer;
+            const noiseGain = audioCtx.createGain();
+            noiseGain.gain.setValueAtTime(0.03, now);
+            noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+            noiseSrc.connect(noiseGain);
+            noiseGain.connect(audioCtx.destination);
+            noiseSrc.start(now);
+            noiseSrc.stop(now + 0.35);
+        }
+
+                // Initialize embedded laugh immediately so keypress will play
+        loadEmbeddedLaugh();
+        let currentSlideIndex = 1;
+        const totalSlides = 25;
+        const timersP1 = {};
+        const timersP2 = {};
+        let verticalTimer = null;
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            showSlide(index);
+        }
+
+        function startPart2() {
+            goToSlide(5);
+        }
+
+        function goToPart2Question(qNum) {
+            const item = part2QuestionsData.find(entry => entry.qNum === qNum);
+            if (item) goToSlide(item.slideIdx);
+        }
+
+        function adjustScaling() {
+            const viewport = document.getElementById('viewport');
+            if (!viewport) return;
+            document.body.style.width = window.innerWidth + 'px';
+            document.body.style.height = window.innerHeight + 'px';
+            const scaleX = window.innerWidth / 1280;
+            const scaleY = window.innerHeight / 720;
+            viewport.style.transform = `scale(${Math.min(scaleX, scaleY)})`;
+        }
+        window.addEventListener('load', adjustScaling);
+        window.addEventListener('resize', adjustScaling);
+        adjustScaling();
+
+        function showSlide(index) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            const targetSlide = document.getElementById(`slide${index}`);
+            if (targetSlide) targetSlide.classList.add('active');
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex === 18) {
+                clearCurrentTimer();
+                currentSlideIndex = 25;
+                showSlide(currentSlideIndex);
+                return;
+            }
+            if (currentSlideIndex < totalSlides) {
+                clearCurrentTimer();
+                currentSlideIndex++;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 1) {
+                clearCurrentTimer();
+                currentSlideIndex--;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        function goToPart2() {
+            currentSlideIndex = 4;
+            showSlide(currentSlideIndex);
+        }
+
+        function clearCurrentTimer() {
+            if (currentSlideIndex >= 5 && currentSlideIndex <= 18) {
+                const qNum = currentSlideIndex - 4;
+                if (timersP2[qNum]) clearInterval(timersP2[qNum].intervalId);
+            }
+            else if (currentSlideIndex >= 19 && currentSlideIndex <= 23) {
+                const qNum = currentSlideIndex - 18;
+                if (timersP1[qNum]) clearInterval(timersP1[qNum].intervalId);
+            }
+            else if (currentSlideIndex === 24) {
+                if (verticalTimer) clearInterval(verticalTimer.intervalId);
+            }
+        }
+
+        function startTimerP1(qNum, seconds = 20) {
+            initAudio();
+            const timerText = document.getElementById(`timer-text-p1-${qNum}`);
+            const timerBar = document.getElementById(`timer-bar-p1-${qNum}`);
+            if (!timerText || !timerBar) return;
+            if (timersP1[qNum]) clearInterval(timersP1[qNum].intervalId);
+
+            let timeLeft = seconds;
+            timerText.innerText = timeLeft;
+            timerBar.style.strokeDashoffset = 0;
+            timerBar.style.stroke = '#dfb15b';
+            
+            const dashArray = 276; 
+            timerBar.style.strokeDasharray = dashArray;
+
+            const intervalId = setInterval(() => {
+                timeLeft--;
+                timerText.innerText = timeLeft;
+                timerBar.style.strokeDashoffset = dashArray - (dashArray * timeLeft / seconds);
+
+                if (timeLeft > 5) playClockTick(800);
+                else if (timeLeft <= 5 && timeLeft > 0) {
+                    timerBar.style.stroke = '#ef4444';
+                    playClockTick(400);
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(intervalId);
+                    timerText.innerText = "HẾT";
+                    playSpiderLaugh(); 
+                }
+            }, 1000);
+            timersP1[qNum] = { intervalId, seconds };
+        }
+
+        function revealAnswerP1(qNum) {
+            const btn = document.getElementById(`btn-reveal-p1-${qNum}`);
+            const box = document.getElementById(`answer-box-p1-${qNum}`);
+            const txt = document.getElementById(`ans-txt-p1-${qNum}`);
+            const desc = document.getElementById(`ans-desc-p1-${qNum}`);
+
+            if (btn && box && txt && desc) {
+                btn.style.display = 'none';
+                box.classList.add('revealed');
+                txt.style.display = 'block';
+                desc.style.display = 'block';
+                playZenBell();
+            }
+        }
+
+        function startTimerP2(qNum, seconds = 20) {
+            initAudio();
+            const timerText = document.getElementById(`timer-text-p2-${qNum}`);
+            const timerBar = document.getElementById(`timer-bar-p2-${qNum}`);
+            if (!timerText || !timerBar) return;
+            if (timersP2[qNum]) clearInterval(timersP2[qNum].intervalId);
+
+            let timeLeft = seconds;
+            timerText.innerText = timeLeft;
+            timerBar.style.strokeDashoffset = 0;
+            timerBar.style.stroke = '#dfb15b'; // Đồng bộ vàng gold
+            
+            const dashArray = 276; 
+            timerBar.style.strokeDasharray = dashArray;
+
+            const intervalId = setInterval(() => {
+                timeLeft--;
+                timerText.innerText = timeLeft;
+                timerBar.style.strokeDashoffset = dashArray - (dashArray * timeLeft / seconds);
+
+                if (timeLeft > 5) playClockTick(800);
+                else if (timeLeft <= 5 && timeLeft > 0) {
+                    timerBar.style.stroke = '#ef4444'; // Đỏ khi sắp hết giờ
+                    playClockTick(400);
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(intervalId);
+                    timerText.innerText = "HẾT";
+                    playSpiderLaugh(); 
+                }
+            }, 1000);
+            timersP2[qNum] = { intervalId, seconds };
+        }
+
+        function revealAnswerP2(qNum) {
+            const btn = document.getElementById(`btn-reveal-p2-${qNum}`);
+            const box = document.getElementById(`answer-box-p2-${qNum}`);
+            const txt = document.getElementById(`ans-txt-p2-${qNum}`);
+            const desc = document.getElementById(`ans-desc-p2-${qNum}`);
+
+            if (btn && box && txt && desc) {
+                btn.style.display = 'none';
+                box.classList.add('revealed');
+                txt.style.display = 'block';
+                desc.style.display = 'block';
+                playZenBell();
+            }
+        }
+
+        function startTimerVertical(seconds = 20) {
+            initAudio();
+            const timerText = document.getElementById('timer-text-vertical');
+            const timerBar = document.getElementById('timer-bar-vertical');
+            if (!timerText || !timerBar) return;
+            if (verticalTimer) clearInterval(verticalTimer.intervalId);
+
+            let timeLeft = seconds;
+            timerText.innerText = timeLeft;
+            timerBar.style.strokeDashoffset = 0;
+            timerBar.style.stroke = '#f4d03f';
+            
+            const dashArray = 276; 
+            timerBar.style.strokeDasharray = dashArray;
+
+            const intervalId = setInterval(() => {
+                timeLeft--;
+                timerText.innerText = timeLeft;
+                timerBar.style.strokeDashoffset = dashArray - (dashArray * timeLeft / seconds);
+
+                if (timeLeft > 5) playClockTick(800);
+                else if (timeLeft <= 5 && timeLeft > 0) {
+                    timerBar.style.stroke = '#ef4444';
+                    playClockTick(400);
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(intervalId);
+                    timerText.innerText = "HẾT";
+                    playSpiderLaugh(); 
+                }
+            }, 1000);
+            verticalTimer = { intervalId, seconds };
+        }
+
+        function revealAnswerVertical() {
+            const btn = document.getElementById('btn-reveal-vertical');
+            const box = document.getElementById('answer-box-vertical');
+            const txt = document.getElementById('ans-txt-vertical');
+            const desc = document.getElementById('ans-desc-vertical');
+
+            if (btn && box && txt && desc) {
+                btn.style.display = 'none';
+                box.classList.add('revealed');
+                txt.style.display = 'block';
+                desc.style.display = 'block';
+                playZenBell();
+            }
+        }
+    </script>
+
+    <script>
+        const CROSSWORD_COLS_COUNT = 12; // 0 -> 11
+        const CROSSWORD_KEY_COL = 6;
+        
+        const crosswordRows = [
+            { text: "DAPHUONG", startCol: 3, visible: false },
+            { text: "I", startCol: 6, visible: false },
+            { text: "BAOVE", startCol: 2, visible: false },
+            { text: "MATTRAN", startCol: 0, visible: false },
+            { text: "D", startCol: 6, visible: false },
+            { text: "TOIAC", startCol: 3, visible: false },
+            { text: "I", startCol: 6, visible: false },
+            { text: "H", startCol: 6, visible: false },
+            { text: "O", startCol: 6, visible: false },
+            { text: "BAN", startCol: 5, visible: false }
+        ];
+
+        const horizontalQs = {
+            1: { rowIdx: 0 },
+            2: { rowIdx: 2 },
+            3: { rowIdx: 3 },
+            4: { rowIdx: 5 },
+            5: { rowIdx: 9 }
+        };
+
+        function renderCrosswordGrid() {
+            const container = document.getElementById('crossword-grid');
+            if (!container) return;
+            container.innerHTML = '';
+
+            crosswordRows.forEach((rowData, rIdx) => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = `flex gap-1 items-center justify-center cw-row-${rIdx}`;
+                
+                const rowLabel = document.createElement('div');
+                rowLabel.className = 'w-6 text-[14px] text-gold font-bold text-right mr-2 select-none';
+                
+                const relevantQuestion = Object.entries(horizontalQs).find(([, value]) => value.rowIdx === rIdx);
+                const qNum = relevantQuestion ? Number(relevantQuestion[0]) : null;
+                rowLabel.innerText = qNum ? `${qNum}` : '';
+
+                if (qNum !== null) {
+                    rowLabel.classList.add('cursor-pointer', 'hover:text-amber-400', 'hover:scale-125', 'transition-all');
+                    rowLabel.title = `Nhấn để xem câu hỏi số ${qNum}`;
+                    rowLabel.onclick = () => showCrosswordQuestion(qNum);
+                }
+
+                rowDiv.appendChild(rowLabel);
+
+                for (let cIdx = 0; cIdx < CROSSWORD_COLS_COUNT; cIdx++) {
+                    const charIdxInWord = cIdx - rowData.startCol;
+                    const hasLetter = charIdxInWord >= 0 && charIdxInWord < rowData.text.length;
+
+                    const cell = document.createElement('div');
+                    if (hasLetter) {
+                        const letter = rowData.text[charIdxInWord];
+                        const isKeyCol = cIdx === CROSSWORD_KEY_COL;
+                        
+                        cell.className = `w-8 h-8 rounded text-sm font-bold flex items-center justify-center cursor-pointer transition-all duration-300 transform border select-none
+                            ${isKeyCol ? 'border-2 border-amuletYellow bg-yellow-950/20 text-gold' : 'border-gold/30 bg-black/60 text-parchment/40'}`;
+                        cell.dataset.row = rIdx;
+                        cell.dataset.col = cIdx;
+                        cell.dataset.letter = letter;
+                        cell.innerText = '?';
+                        cell.onclick = () => revealCell(cell);
+                    } else {
+                        cell.className = 'w-8 h-8 opacity-0';
+                    }
+                    rowDiv.appendChild(cell);
+                }
+                container.appendChild(rowDiv);
+            });
+        }
+
+        function revealCell(cell) {
+            initAudio();
+            if (cell.innerText === '?') {
+                cell.innerText = cell.dataset.letter;
+                cell.classList.remove('text-parchment/40');
+                cell.classList.add('text-gold', 'bg-gold/25', 'border-gold', 'revealed');
+                cell.style.transform = 'rotateY(360deg)';
+                playClockTick(900);
+                
+                checkVerticalKeywordUnlocked();
+            }
+        }
+
+        function showCrosswordQuestion(qNum) {
+            initAudio();
+            const qInfo = part1QuestionsData.find(item => item.qNum === qNum);
+            if (qInfo) {
+                currentSlideIndex = qInfo.slideIdx;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        function showVerticalKeyQuestion() {
+            initAudio();
+            currentSlideIndex = 24;
+            showSlide(currentSlideIndex);
+        }
+
+        function revealEntireCrossword() {
+            initAudio();
+            document.querySelectorAll('#crossword-grid [data-row]').forEach(cell => {
+                revealCell(cell);
+            });
+            playZenBell();
+        }
+
+        function checkVerticalKeywordUnlocked() {
+            let unlocked = true;
+            document.querySelectorAll(`#crossword-grid [data-col="${CROSSWORD_KEY_COL}"]`).forEach(cell => {
+                if (cell.innerText === '?') unlocked = false;
+            });
+            if (unlocked) {
+                playZenBell();
+            }
+        }
+
+        function backAndRevealCrossword(qNum) {
+            initAudio();
+            const qInfo = part1QuestionsData.find(item => item.qNum === qNum);
+            if (qInfo) {
+                const targetRowIdx = qInfo.rowIdx;
+                document.querySelectorAll(`#crossword-grid [data-row="${targetRowIdx}"]`).forEach(cell => {
+                    revealCell(cell);
+                });
+            }
+            clearCurrentTimer();
+            currentSlideIndex = 3; 
+            showSlide(currentSlideIndex);
+            playZenBell();
+        }
+
+        function backAndRevealVerticalKey() {
+            initAudio();
+            document.querySelectorAll(`#crossword-grid [data-col="${CROSSWORD_KEY_COL}"]`).forEach(cell => {
+                revealCell(cell);
+            });
+            clearCurrentTimer();
+            currentSlideIndex = 3; 
+            showSlide(currentSlideIndex);
+            playZenBell();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCrosswordGrid();
+        });
+    </script>
+
+    <script>
+        // 1. SINH LƯỚI BẢN ĐỒ 42 Ô (6 hàng x 7 cột)
+        const gridContainer = document.getElementById('puzzle-grid');
+        const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
+        
+        gridContainer.innerHTML += `<div class="grid-cell grid-label">Góc</div>`;
+        for(let i=1; i<=7; i++) {
+            gridContainer.innerHTML += `<div class="grid-cell grid-label">${i}</div>`;
+        }
+
+        rows.forEach(row => {
+            gridContainer.innerHTML += `<div class="grid-cell grid-label">${row}</div>`;
+            for(let col=1; col<=7; col++) {
+                const cellId = `${row}${col}`;
+                gridContainer.innerHTML += `
+                    <div class="grid-cell" data-id="${cellId}" onclick="cycleCellState(this)">
+                        ${cellId}
+                    </div>
+                `;
+            }
+        });
+
+        const gridBtn = document.getElementById('grid-btn');
+        const gridModal = document.getElementById('grid-modal');
+        if(gridBtn) gridBtn.addEventListener('click', toggleGrid);
+
+        function toggleGrid() {
+            gridModal.classList.toggle('hidden');
+        }
+
+        function cycleCellState(cell) {
+            if (cell.classList.contains('grid-label')) return;
+            initAudio();
+            
+            if (cell.classList.contains('found')) {
+                cell.classList.remove('found');
+                cell.classList.remove('crossed');
+                cell.innerHTML = cell.dataset.id;
+            } else if (cell.classList.contains('crossed')) {
+                cell.classList.remove('crossed');
+                cell.classList.add('found');
+                cell.innerHTML = '<i class="fa-solid fa-hands-praying text-xl text-green-400"></i>';
+                playZenBell();
+            } else {
+                cell.classList.add('crossed');
+                cell.innerHTML = '<i class="fa-solid fa-xmark text-xl text-red-400"></i>';
+                playClockTick(500);
+            }
+        }
+
+        // 2. KHỞI TẠO TÚI 22 MANH MỐI BỐC THĂM
+        const allClues = [
+            "Sư phụ ở rất xa phương Bắc.",
+            "Đừng nhìn các số chẵn.",
+            "Sư phụ không ở hàng A.",
+            "Sư phụ không ở hàng B.",
+            "Sư phụ không ở hàng C.",
+            "Sư phụ không ở hàng D.",
+            "Sư phụ không ở hàng E.",
+            "Cột của ô là một số nguyên tố.",
+            "Hàng của ta có số thứ tự bằng số mặt của một khối lập phương.",
+            "Hiệu giữa số thứ tự hàng và cột bằng 1.",
+            "Sư phụ không ở ô nào có cả hàng và cột đều chẵn.",
+            "Tổng giá trị thứ tự hàng và cột là số nguyên tố.",
+            "Tổng thứ tự hàng và cột là số cầu thủ trên sân của một đội bóng .",
+            "Sư phụ ở ngay cạnh hàng E.",
+            "Sư phụ ở cạnh cột 4.",
+            "Sư phụ ở cạnh cột 6.",
+            "Sư phụ không nằm ở khu vực chính giữa bản đồ.",
+            "Sư phụ gần mép phải hơn mép trái.",
+            "Số thứ tự cột bằng số vòng tròn trên logo Olympic .",
+            "Ngộ Không chỉ cần 5 gậy Như Ý xếp nối nhau để chạm đến động.",
+            "Yêu quái đưa sư phụ xuống tầng sâu nhất của hang .",
+            "Sư phụ không ở góc."
+        ];
+        
+        let availableClues = [...allClues];
+        let drawnClues = [];
+
+        const clueBtn = document.getElementById('clue-btn');
+        const clueModal = document.getElementById('clue-modal');
+        if (clueBtn) clueBtn.addEventListener('click', toggleClue);
+
+        function toggleClue() {
+            clueModal.classList.toggle('hidden');
+        }
+
+        function drawClue() {
+            if (availableClues.length === 0) {
+                document.getElementById('current-clue').innerText = "Túi đã cạn, không còn manh mối nào!";
+                return;
+            }
+            
+            playZenBell();
+            
+            const clueText = document.getElementById('current-clue');
+            clueText.classList.remove('animate-pulse');
+            void clueText.offsetWidth; 
+            clueText.classList.add('animate-pulse');
+            
+            const randIndex = Math.floor(Math.random() * availableClues.length);
+            const clue = availableClues.splice(randIndex, 1)[0];
+            
+            drawnClues.unshift(clue); 
+            clueText.innerHTML = `<span class="text-gold">"${clue}"</span>`;
+            
+            updateClueHistory();
+        }
+
+        function updateClueHistory() {
+            document.getElementById('clue-counter').innerText = drawnClues.length;
+            const historyContainer = document.getElementById('clue-history');
+            historyContainer.innerHTML = '';
+            
+            drawnClues.forEach((c, idx) => {
+                historyContainer.innerHTML += `<div class="bg-amber-950/40 p-2.5 rounded border-l-4 border-amber-400 mb-2 font-vietnam"><strong>Lần ${drawnClues.length - idx}:</strong> ${c}</div>`;
+            });
+        }
+
+        // 3. THIẾT LẬP BẢNG ĐIỂM
+        const teamsContainer = document.getElementById('teams-container');
+        for(let i=1; i<=4; i++) {
+            teamsContainer.innerHTML += `
+                <div class="flex items-center justify-between bg-black/40 p-2.5 rounded-lg border border-gold/20">
+                    <input type="text" id="team-name-${i}" value="Đội ${i}" class="bg-transparent border-b border-gold/30 focus:border-gold text-gold font-bold px-2 py-1 outline-none w-1/4 text-[15px] font-vietnam">
+                    <div class="flex items-center gap-1.5 flex-1 justify-end">
+                        <button onclick="adjustScore(${i}, -1)" class="w-8 h-8 rounded-full bg-red-950/50 text-red-400 border border-red-500/30 flex justify-center items-center font-bold text-xs hover:bg-red-800 transition">-1</button>
+                        <button onclick="adjustScore(${i}, 1)" class="px-2 h-8 rounded bg-green-950/50 text-green-400 border border-green-500/30 font-bold text-xs hover:bg-green-800 transition">+1 Điểm</button>
+                        <button onclick="adjustScore(${i}, 5)" class="px-2 h-8 rounded bg-blue-950/50 text-blue-400 border border-blue-500/30 font-bold text-xs hover:bg-blue-800 transition">+5đ (Top 4)</button>
+                        <button onclick="adjustScore(${i}, 10)" class="px-2 h-8 rounded bg-purple-950/50 text-purple-400 border border-purple-500/30 font-bold text-xs hover:bg-purple-800 transition">+10đ (Top 3)</button>
+                        <button onclick="adjustScore(${i}, 15)" class="px-2 h-8 rounded bg-orange-950/50 text-orange-400 border border-orange-500/30 font-bold text-xs hover:bg-orange-800 transition">+15đ (Top 2)</button>
+                        <button onclick="adjustScore(${i}, 20)" class="px-2 h-8 rounded bg-yellow-600/40 text-yellow-400 border border-yellow-500/30 font-bold text-xs hover:bg-yellow-600 transition">+20đ (Top 1)</button>
+                        <span id="score-val-${i}" class="text-2xl font-bold text-parchment min-w-[50px] text-right ml-2 font-vietnam">0</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        const scoreboardBtn = document.getElementById('scoreboard-btn');
+        const scoreboardModal = document.getElementById('scoreboard-modal');
+        if (scoreboardBtn) scoreboardBtn.addEventListener('click', toggleScoreboard);
+
+        function toggleScoreboard() {
+            scoreboardModal.classList.toggle('hidden');
+            confirmReset(false);
+        }
+
+        function adjustScore(teamId, amount) {
+            const scoreEl = document.getElementById(`score-val-${teamId}`);
+            if (!scoreEl) return;
+            let currentScore = parseInt(scoreEl.innerText) || 0;
+            currentScore += amount;
+            scoreEl.innerText = currentScore;
+            
+            if (amount > 0) playZenBell();
+            else playClockTick(300);
+        }
+
+        function askResetConfirmation() {
+            document.getElementById('reset-btn').classList.add('hidden');
+            document.getElementById('reset-confirm-zone').classList.remove('hidden');
+        }
+
+        function confirmReset(shouldReset) {
+            if (shouldReset) {
+                for (let i = 1; i <= 4; i++) {
+                    const scoreValue = document.getElementById(`score-val-${i}`);
+                    if (scoreValue) scoreValue.innerText = '0';
+                }
+            }
+            document.getElementById('reset-btn').classList.remove('hidden');
+            document.getElementById('reset-confirm-zone').classList.add('hidden');
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (document.activeElement.tagName === 'INPUT') return;
+
+            // PHÍM V: Phát âm thanh cười
+            if (e.key.toLowerCase() === 'v') {
+                e.preventDefault();
+                playLaugh();
+                return;
+            }
+
+            // PHÍM E: Truy cập trang giải cứu Đường Tăng
+            if (e.key.toLowerCase() === 'e') {
+                e.preventDefault();
+                goToSlide(25);
+                return;
+            }
+
+            // PHÍM G: Mở/đóng Túi Cẩm Nang Manh Mối
+            if (e.key.toLowerCase() === 'g') {
+                e.preventDefault();
+                toggleClue();
+                return;
+            }
+
+            // PHÍM 1-5: Mở câu hỏi trong trận đồ ô chữ phong ấn
+            if (currentSlideIndex === 3 && /^[1-5]$/.test(e.key)) {
+                e.preventDefault();
+                showCrosswordQuestion(Number(e.key));
+                return;
+            }
+
+            // PHÍM K: Mở Lá bùa Dọc
+            if (currentSlideIndex === 3 && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                showVerticalKeyQuestion();
+                return;
+            }
+
+            if (e.key === 'ArrowRight') {
+                if ((currentSlideIndex >= 19 && currentSlideIndex <= 23) || currentSlideIndex === 24) {
+                    e.preventDefault();
+                    return;
+                }
+                if (currentSlideIndex === totalSlides) {
+                    e.preventDefault();
+                    return;
+                }
+                nextSlide();
+            }
+            else if (e.key === 'ArrowLeft') {
+                if (currentSlideIndex >= 19 && currentSlideIndex <= 23) {
+                    e.preventDefault();
+                    const qNum = currentSlideIndex - 18;
+                    backAndRevealCrossword(qNum);
+                } else if (currentSlideIndex === totalSlides) {
+                    e.preventDefault();
+                    currentSlideIndex = 18;
+                    showSlide(18);
+                } else if (currentSlideIndex === 24) {
+                    e.preventDefault();
+                    backAndRevealVerticalKey();
+                } else {
+                    prevSlide();
+                }
+            }
+            else if (e.key === ' ') {
+                if (clueModal && !clueModal.classList.contains('hidden')) {
+                    e.preventDefault();
+                    drawClue();
+                } else {
+                    e.preventDefault(); 
+                    if (currentSlideIndex === 3) {
+                        // Không làm gì ở slide ô chữ chính
+                    } else if (currentSlideIndex >= 5 && currentSlideIndex <= 18) {
+                        const qId = currentSlideIndex - 4;
+                        startTimerP2(qId, 20);
+                    } else if (currentSlideIndex >= 19 && currentSlideIndex <= 23) {
+                        const qId = currentSlideIndex - 18;
+                        startTimerP1(qId, 20);
+                    } else if (currentSlideIndex === 24) {
+                        startTimerVertical(20);
+                    }
+                }
+            } else if (e.key === 'r' || e.key === 'R' || e.key === 'Enter') {
+                if (currentSlideIndex === 3) {
+                    // Không làm gì ở slide ô chữ chính
+                } else if (currentSlideIndex >= 5 && currentSlideIndex <= 18) {
+                    const qId = currentSlideIndex - 4;
+                    revealAnswerP2(qId);
+                } else if (currentSlideIndex >= 19 && currentSlideIndex <= 23) {
+                    const qId = currentSlideIndex - 18;
+                    revealAnswerP1(qId);
+                } else if (currentSlideIndex === 24) {
+                    revealAnswerVertical();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
